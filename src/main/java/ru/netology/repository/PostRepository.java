@@ -1,13 +1,12 @@
 package ru.netology.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.netology.model.Post;
 
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Repository
+// Stub
 public class PostRepository {
     private ConcurrentHashMap<Long, String> posts = new ConcurrentHashMap<>();
     private AtomicLong count = new AtomicLong(0);
@@ -17,6 +16,12 @@ public class PostRepository {
     }
 
     public Optional<Post> getById(long id) {
+        for (long key : posts.keySet()) {
+            if (key == id) {
+                Post post = new Post(id, posts.get(id));
+                return Optional.of(post);
+            }
+        }
         return Optional.empty();
     }
 
@@ -35,5 +40,11 @@ public class PostRepository {
     }
 
     public void removeById(long id) {
+        for (long key : posts.keySet()) {
+            if (key == id) {
+                posts.remove(id);
+                break;
+            }
+        }
     }
 }
