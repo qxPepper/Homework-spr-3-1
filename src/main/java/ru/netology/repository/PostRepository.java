@@ -16,6 +16,12 @@ public class PostRepository {
     }
 
     public Optional<Post> getById(long id) {
+        for (long key : posts.keySet()) {
+            if (key == id) {
+                Post post = new Post(id, posts.get(id));
+                return Optional.of(post);
+            }
+        }
         return Optional.empty();
     }
 
@@ -34,5 +40,11 @@ public class PostRepository {
     }
 
     public void removeById(long id) {
+        for (long key : posts.keySet()) {
+            if (key == id) {
+                posts.remove(id);
+                break;
+            }
+        }
     }
 }
