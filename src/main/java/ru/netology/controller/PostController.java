@@ -28,7 +28,6 @@ public class PostController {
         final var gson = new Gson();
         final var post = service.getById(id);
         response.getWriter().print(gson.toJson(post));
-
     }
 
     public void save(Reader body, HttpServletResponse response) throws IOException {
